@@ -465,6 +465,21 @@ class HRNetSMPLCam(nn.Module):
 
         transl = camera_root - output.joints.float().reshape(-1, 24, 3)[:, 0, :]
 
+        ######################################
+
+        transl_to_save = transl.detach().cpu()
+        transl_file_path = 'translation.pt'
+
+        if os.path.exists(transl_file_path):
+            existing_translations = torch.load(transl_file_path, weights_only=True)
+            combined_translations = torch.cat([existing_translations, transl_to_save], dim=0)
+        else:
+            combined_translations = transl_to_save
+
+        torch.save(combined_translations, transl_file_path)
+
+        ######################################
+
         output = edict(
             pred_phi=pred_phi,
             pred_delta_shape=delta_shape,

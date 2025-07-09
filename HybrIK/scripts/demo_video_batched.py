@@ -429,5 +429,11 @@ import subprocess
 import sys
 import os
 
-os.chdir("C:/Users/Avinash/Tyler/HybrIK test/")
+# Move up one level from the current working directory
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
+
+# Change working directory to the parent
+os.chdir(parent_dir)
+
+# Run the script in the parent directory
 subprocess.run([sys.executable, "generate_offsets.py"])

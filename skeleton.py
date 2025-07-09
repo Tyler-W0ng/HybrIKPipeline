@@ -109,7 +109,7 @@ class AMASSSkeleton(BaseSkeleton):
     joint_connection_dict = {}
     body_model_file = './body_model/scaled_offsets.npz'
 
-    pklFile = "C:/Users/Avinash/Tyler/HybrIK test/HybrIK/model_files/basicModel_neutral_lbs_10_207_0_v1.0.0.pkl"
+    pklFile = "./HybrIK/model_files/basicModel_neutral_lbs_10_207_0_v1.0.0.pkl"
     with open(pklFile, 'rb') as f:
         model_data = pickle.load(f, encoding='latin1')
 

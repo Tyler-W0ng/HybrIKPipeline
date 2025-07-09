@@ -147,7 +147,7 @@ def compute_scaled_offsets_from_scales(bone_scales, save_path='./body_model/scal
     print(f"[INFO] Scaled offsets saved to: {save_path}")
 
 
-pklFile = "C:/Users/Avinash/Tyler/HybrIK test/HybrIK/model_files/basicModel_neutral_lbs_10_207_0_v1.0.0.pkl"
+pklFile = "./HybrIK/model_files/basicModel_neutral_lbs_10_207_0_v1.0.0.pkl"
 with open(pklFile, 'rb') as f:
     model_data = pickle.load(f, encoding='latin1')
 
@@ -160,21 +160,22 @@ parents = parents_raw.astype(np.int64)
 root_mask = parents_raw == np.iinfo(np.uint32).max 
 parents[root_mask] = -1
 
-rot_file = torch.load("C:/Users/Avinash/Tyler/HybrIK test/HybrIK/rotation_matrices_fencing.pt", weights_only=True)
-
-frame_num = 300
-start = frame_num * 24
-end = 24 + frame_num * 24
-rotmats = rot_file[start:end].unsqueeze(0)
-
 generate_bone_length_file()
 bone_scales = get_bone_scales(parents)
 bone_scales = torch.tensor(bone_scales, dtype=torch.float32).unsqueeze(0)
 compute_scaled_offsets_from_scales(bone_scales.squeeze(0).numpy())
 
-### Vizualization example
+# ## Vizualization example
 # from skeleton import AMASSSkeleton
 # skeleton = AMASSSkeleton()
+
+# rot_file = torch.load("./HybrIK/rotation_matrices_fencing.pt", weights_only=True)
+
+# frame_num = 300
+# start = frame_num * 24
+# end = 24 + frame_num * 24
+# rotmats = rot_file[start:end].unsqueeze(0)
+
 # joint_positions = skeleton.ang2joint(rotmats)
 
-#visualize_joints(joint_positions[0], parents)
+# visualize_joints(joint_positions[0], parents)

@@ -10,4 +10,4 @@ def show_frame(video_path, frame_number):
         cv2.waitKey(0)
     cap.release()
 
-show_frame('C:/Users/Avinash/Tyler/HybrIK test/HybrIK/examples/child_running.mp4', 300)
+show_frame('./HybrIK/examples/child_running.mp4', 300)
